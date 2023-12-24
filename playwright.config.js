@@ -8,10 +8,11 @@ const config={
     timeout:5000
   },
 
-  reporter:'html',
 
+  reporter:'html',
   use:{
-    browserName:'chromium'
+    browserName:'chromium',
+    headless:false
 
   },
 };
