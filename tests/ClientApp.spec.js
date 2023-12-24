@@ -9,7 +9,7 @@ await  page.goto("https://rahulshettyacademy.com/client/");
  await page.locator("#userPassword").fill("Playwright@1234");
  await page.locator('#login').click();
 
- console.log(await page.locator(".card-body b").nth(1))
+ console.log(await page.locator(".card-body b").nth(1).textContent())
 //  console.log(await page.locator(".card-body b").allTextContents())
 
 
