@@ -39,15 +39,27 @@ test('first Browser context Plywright test', async ({browser})=>{
     console.log(await page.locator(".card-body a").first().textContent());
     console.log(await cardTitles.allTextContents());
 
-    
+});
 
+test.only('UI Controls', async({page})=>{
+await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+const userName=page.locator("#username")
+const password=page.locator("#password")
+const signInBtn=page.locator("#signInBtn")
+await userName.fill("rahulshettyacademy");
+await password.fill("learning")
 
+//creating Dropdown Variable
+const dropDown=page.locator("select.form-control")
+//selecting dropdown 
+await dropDown.selectOption("Student");
 
+//Radio button
+await page.locator(".radiotextsty").last().click()
+await page.locator("#okayBtn").click();
+await page.pause()
 
-
- 
-
-
+await signInBtn.click();
 
 
 
