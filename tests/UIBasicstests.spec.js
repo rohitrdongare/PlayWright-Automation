@@ -57,7 +57,7 @@ console.log(await page.locator(".radiotextsty").last().isChecked())
 await expect(page.locator(".radiotextsty").last()).toBeChecked();
 
 await page.locator("#terms").click();
-console.log(page.locator("#terms").isChecked())
+await expect(page.locator("#terms")).toBeChecked()
 
 await page.locator("#terms").uncheck();
 expect( await page.locator("#terms").isChecked()).toBeFalsy(); //test will because it is already unchecked 
