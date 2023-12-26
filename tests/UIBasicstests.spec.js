@@ -41,7 +41,7 @@ test('first Browser context Plywright test', async ({browser})=>{
 
 });
 
-test.only('UI Controls', async({page})=>{
+test('UI Controls', async({page})=>{
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 const userName=page.locator("#username")
 const signInBtn=page.locator("#signInBtn");
@@ -67,26 +67,40 @@ expect( await page.locator("#terms").isChecked()).toBeFalsy(); //test will becau
 
 await expect(documentLink).toHaveAttribute("class", "blinkingText"); //pass
 
+})
 
 
 
+test.only('Child Windows Handling', async({browser})=>{
+
+    const context=await browser.newContext(); //orginal page context
+    const page=await context.newPage(); 
+    const userName=page.locator("#username");
+    const documentLink=page.locator("[href='https://rahulshettyacademy.com/documents-request']");
+
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const [newPage]=await Promise.all(
+        [
+            context.waitForEvent('page') ,//listen for new page prnding , rejected , fullfilled
+            documentLink.click() , //new page is opened 
+        ]
+    )
+
+  const text=await newPage.locator(".red").textContent();
+  console.log(text)
+  const arrayText=text.split("@");
+  const domain=arrayText[1].split(" ")[0];   //Left side string 
+  console.log(domain);
 
 
-// await page.pause();
+  //how to insert domain value(of child page) in username name inside parent page
+  await page.locator("#username").fill(domain);
 
+  await page.pause()
+//   console.log(await page.locator("#username").textContent());
+  
 
-
-
-
-
-
-
-
-
-// await page.pause();
-
-
-
+   
 
 
 
