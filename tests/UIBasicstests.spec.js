@@ -44,22 +44,47 @@ test('first Browser context Plywright test', async ({browser})=>{
 test.only('UI Controls', async({page})=>{
 await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 const userName=page.locator("#username")
-const password=page.locator("#password")
-const signInBtn=page.locator("#signInBtn")
-await userName.fill("rahulshettyacademy");
-await password.fill("learning")
+const signInBtn=page.locator("#signInBtn");
+const dropdown=page.locator("select.form-control");
+const documentLink=page.locator("[href='https://rahulshettyacademy.com/documents-request']");
+await dropdown.selectOption("consult");  //consult is the value from inspect
 
-//creating Dropdown Variable
-const dropDown=page.locator("select.form-control")
-//selecting dropdown 
-await dropDown.selectOption("Student");
 
-//Radio button
-await page.locator(".radiotextsty").last().click()
+await page.locator(".radiotextsty").last().click();
 await page.locator("#okayBtn").click();
-await page.pause()
 
-await signInBtn.click();
+console.log(await page.locator(".radiotextsty").last().isChecked())
+await expect(page.locator(".radiotextsty").last()).toBeChecked();
+
+await page.locator("#terms").click();
+console.log(page.locator("#terms").isChecked())
+
+await page.locator("#terms").uncheck();
+expect( await page.locator("#terms").isChecked()).toBeFalsy(); //test will because it is already unchecked 
+// expect( await page.locator("#terms").isChecked()).toBeTruthy(); // test will fail because it is failed i cant truthy
+
+// how to know Link is blinkking or not , for that check attribute value
+
+await expect(documentLink).toHaveAttribute("class", "blinkingText"); //pass
+
+
+
+
+
+
+// await page.pause();
+
+
+
+
+
+
+
+
+
+
+// await page.pause();
+
 
 
 
