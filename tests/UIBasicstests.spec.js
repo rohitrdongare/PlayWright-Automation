@@ -71,7 +71,7 @@ await expect(documentLink).toHaveAttribute("class", "blinkingText"); //pass
 
 
 
-test.only('Child Windows Handling', async({browser})=>{
+test('Child Windows Handling', async({browser})=>{
 
     const context=await browser.newContext(); //orginal page context
     const page=await context.newPage(); 
