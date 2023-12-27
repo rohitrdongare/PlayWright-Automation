@@ -1,6 +1,6 @@
 const {test}=require('@playwright/test');
 
-test.only('New test',async ({page})=>{
+test('New test',async ({page})=>{
 
 
    await page.goto("https://rahulshettyacademy.com/loginpagePractise/") ;
@@ -8,5 +8,5 @@ test.only('New test',async ({page})=>{
    await page.locator("#password").fill("learning");
    await page.locator("#signInBtn").click();
    
-   await page.pause();
+   // await page.pause();
 })

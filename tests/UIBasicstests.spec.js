@@ -96,7 +96,7 @@ test('Child Windows Handling', async({browser})=>{
   //how to insert domain value(of child page) in username name inside parent page
   await page.locator("#username").fill(domain);
 
-  await page.pause()
+//   await page.pause()
 //   console.log(await page.locator("#username").textContent());
   
 
