@@ -1,6 +1,6 @@
 const {test}=require('@playwright/test');
 
-test.only('3M Citrix log in',async ({page})=>{
+test('3M Citrix log in',async ({page})=>{
 
     await page.goto("https://3mcitrix.mmm.com/logon/LogonPoint/tmindex.html");
     // await page.waitForLoadState('networkidle')
