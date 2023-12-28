@@ -1,7 +1,7 @@
 const {test, expect}=require("@playwright/test");
 const { validateHeaderName } = require("http");
 
-test.only('Client App Login',async ({page})=>{
+test('Client App Login',async ({page})=>{
     const products=page.locator(".card-body");
     const productName="ZARA COAT 3";
     const email="rohitdongare1999@gmail.com";
