@@ -1,6 +1,6 @@
 const {test, expect}=require('@playwright/test')
 
-test.only('popup validations',async ({page})=>{
+test('popup validations',async ({page})=>{
 await page.goto("https://rahulshettyacademy.com/AutomationPractice/")
 
 // await page.goto("https://www.google.com")
