@@ -1,53 +1,50 @@
-const {test,expect,request}=require('@playwright/test');
-const loginPayload={userEmail: "rohitdongare1999@gmail.com", userPassword: "Playwright@1234"};  
+const {test,expect, request}=require('@playwright/test');
+const loginPayload ={userEmail: "rohitdongare1999@gmail.com", userPassword: "Playwright@1234"} //json data as js object
 let token;
 
-test.beforeAll(async ()=>
-{
+
+
+test.beforeAll(async()=>{
 const apiContext=await request.newContext();
-const loginResponse= await apiContext.post(" https://rahulshettyacademy.com/api/ecom/auth/login",
+const loginResponse=await apiContext.post("https://rahulshettyacademy.com/api/ecom/auth/login",
 {
-    data:loginPayload
+    data:{userEmail: "rohitdongare1999@gmail.com", userPassword: "Playwright@1234"}
 })
 
+expect(loginResponse.ok()).toBeTruthy()//to make sure it did not failed
 
-//to check login response status failed or pass
-expect(loginResponse.ok()).toBeTruthy(); //it checks is it between 200 , 201
+const loginResponseJson=await loginResponse.json();
 
-//grabbing JSON response that is token      
-const loginResponseJson=loginResponse.json();
-token=loginResponseJson.token;
+const token =await loginResponseJson.token;//to get token from json(object) (object.token)
 console.log(token)
-}
-);
-
-
-test.beforeEach()
+});
 
 
 
+test.beforeEach(()=>{
 
+})
 
-test('Client App Login',async ({page})=>{
+test.only('Client App Login',async ({page})=>{
+   
+//providing value of token to browser
+    page.addInitScript(value =>{
+    window.localStorage.setItem('token',value);
+    },token)
     
-    //Inserting token as playwright dont have abillity to insert it ,
-    // therefore playwright will executing JS expression
+    const email="";
+    const productName="ZARA COAT 3";
+    await page.goto("https://rahulshettyacademy.com/client/")
+    const products=page.locator(".card-body");
 
-    page.addInitScript(value=>{
-        window.localStorage.setItem('token',value);  ///function
-    },token)  //token is parameter
-    
-    
     // await page.goto("https://rahulshettyacademy.com/client/");
     // await page.locator("#userEmail").fill("rohitdongare1999@gmail.com");
     // await page.locator("#userPassword").fill("Playwright@1234");
     // await page.locator("#login").click();
     // await page.waitForLoadState('networkidle')
 
-    const email="";
-    const productName="ZARA COAT 3";
-    await page.goto("https://rahulshettyacademy.com/client/")
-    const products=page.locator(".card-body");
+    
+
     const titles=await page.locator(".card-body b").allTextContents();
     console.log(titles);
     const count =await products.count();
